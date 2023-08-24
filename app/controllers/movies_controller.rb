@@ -7,9 +7,9 @@ class MoviesController < ApplicationController
     @movie = Movie.find_by(id: params[:id])
   end
 
-  def random
-    random_id = rand(1...Movie.count)
-    @movie = Movie.find_by(id: random_id)
-    render :show
+  def like 
+    @movie = Movie.find_by(id: params[:id])
+    Like.create(user_id: current_user.id, movie_id: @movie.id)
+    redirect_to movie_path(@movie)
   end
 end
