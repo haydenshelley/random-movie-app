@@ -1,0 +1,9 @@
+<h1>Movie Night App</h1>
+<a href="/random">Show random movie</a>
+<br>
+<% if current_user %>
+  <a href="/logout">Log Out</a>
+<% else %>
+  <a href="/login">Log In</a> 
+  <a href="/signup">Sign Up</a>
+<% end %>
