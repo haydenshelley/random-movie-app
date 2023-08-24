@@ -2,3 +2,4 @@
 <p><%= @movie.genre %></p>
 <p>Rating: <%= @movie.rating %>%</p>
 <p><%= @movie.plot %></p>
+<%= button_to "Like", like_path(@movie), method: "post" %>
