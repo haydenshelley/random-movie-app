@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :movies
   get "/liked" => "movies#liked" 
   post '/movie/:id/like', to: 'movies#like', as: 'like'
+  delete "/liked/:id" => "movies#unlike"
 
   get "/signup" => "users#new"
   post "/users" => "users#create"

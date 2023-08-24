@@ -1,10 +1,19 @@
-<% random_id = rand(1...Movie.count) %>
-<% @rand_movie = Movie.find_by(id: random_id) %>
+<% @all_movies = Movie.all %>
+<% @rand_movie = @all_movies.sample %>
+<% my_movies = current_user.movies.sample(3) %>
 
 <h1>Movie Night</h1>
 <a href="/movies/<%= @rand_movie.id %>">Tonights Movie</a>
 <br>
 <a href="/liked">My Movies</a>
+<br>
+<% my_movies.each do |movie| %>
+  <% input = movie.title.gsub(" ","+") %>
+  <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
+  <% movie_response = response.parse(:json) %>
+  <% image = movie_response['Poster'] %>
+  <a href="/movies/<%= movie.id %>"><img src="<%= image %>"></a>
+<% end %>
 <br>
 <% if current_user %>
   <a href="/logout">Log Out</a>
