@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get "/random" => "movies#random"
 
   post "/users" => "users#create"
+
+  post "/sessions" => "sessions#create"
 end
