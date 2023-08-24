@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+movies = CSV.read("imdb_movies.csv")
+
+i = 1
+while i < movies.length
+  Movie.create(
+    title: movies[i][0],
+    genre: movies[i][3],
+    rating: movies[i][2],
+    plot: movies[i][4]
+  )
+  i += 1
+end
