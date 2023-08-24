@@ -1,5 +1,8 @@
+<% random_id = rand(1...Movie.count) %>
+<% @rand_movie = Movie.find_by(id: random_id) %>
 <h1><%= @movie.title %></h1>
 <p><%= @movie.genre %></p>
 <p>Rating: <%= @movie.rating %>%</p>
 <p><%= @movie.plot %></p>
 <%= button_to "Like", like_path(@movie), method: "post" %>
+<a href="/movies/<%= @rand_movie.id %>">Different Movie</a>

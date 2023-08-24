@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
   def like 
     @movie = Movie.find_by(id: params[:id])
     Like.create(user_id: current_user.id, movie_id: @movie.id)
-    redirect_to movie_path(@movie)
+    redirect_to "/liked"
   end
 
   def liked
