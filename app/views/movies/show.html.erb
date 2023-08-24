@@ -1,8 +1,14 @@
+<% input = @movie.title.gsub(" ","+") %>
+<% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
+<% movie_response = response.parse(:json) %>
+<% image = movie_response['Poster'] %>
+
 <% random_id = rand(1...Movie.count) %>
 <% @rand_movie = Movie.find_by(id: random_id) %>
 <h1><%= @movie.title %></h1>
-<p><%= @movie.genre %></p>
-<p>Rating: <%= @movie.rating %>%</p>
-<p><%= @movie.plot %></p>
+<img src="<%= image %>">
+<p>Genre(s): <%= @movie.genre %></p>
+<p>Audience Approval: <%= @movie.rating %>%</p>
+<p>Synopsis: <%= @movie.plot %></p>
 <%= button_to "Like", like_path(@movie), method: "post" %>
 <a href="/movies/<%= @rand_movie.id %>">Different Movie</a>
