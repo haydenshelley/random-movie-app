@@ -1,8 +1,10 @@
 <% random_id = rand(1...Movie.count) %>
 <% @movie = Movie.find_by(id: random_id) %>
 
-<h1>Movie Night App</h1>
-<a href="/movies/<%= @movie.id %>">Show random movie</a>
+<h1>Movie Night</h1>
+<a href="/movies/<%= @movie.id %>">Tonights Movie</a>
+<br>
+<a href="/movies/liked">My Movies</a>
 <br>
 <% if current_user %>
   <a href="/logout">Log Out</a>

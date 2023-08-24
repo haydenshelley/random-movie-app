@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/pages" => "pages#index"
 
   resources :movies
-  get "/random" => "movies#random"
+  get "/liked" => "movies#liked" 
   post '/movie/:id/like', to: 'movies#like', as: 'like'
 
   get "/signup" => "users#new"

@@ -12,4 +12,10 @@ class MoviesController < ApplicationController
     Like.create(user_id: current_user.id, movie_id: @movie.id)
     redirect_to movie_path(@movie)
   end
+
+  def liked
+    @movies = current_user.movies
+    render :liked
+  end
+
 end
