@@ -2,6 +2,10 @@
 <h1><%= @user.name %></h1>
 <h2><%= @user.name %>'s Liked Movies</h2>
 <% movies.each do |movie| %>
-  <a href="/movies/<%= movie.id%>"><%= movie.title %></a> 
+  <% input = movie.title.gsub(" ","+") %>
+  <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
+  <% movie_response = response.parse(:json) %>
+  <a href="/movies/<%= movie.id%>"><%= movie.title %></a>
+  <img src="<%= movie_response["Poster"] %>"> 
   <br>
 <% end %>
