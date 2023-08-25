@@ -3,9 +3,11 @@
   <% input = movie.title.gsub(" ","+") %>
   <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
   <% movie_response = response.parse(:json) %>
+  <div class="liked_movies">
   <a class="mymovies" href="/movies/<%= movie.id%>"><%= movie.title %></a>
   <br>
   <a href="/movies/<%= movie.id %>"><img src="<%= movie_response["Poster"] %>"></a>
+  </div>
   <br>
   <br>
 <% end %>
