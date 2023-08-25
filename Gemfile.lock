@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    amistad (0.10.2)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -234,6 +235,7 @@ PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
+  amistad
   bcrypt (~> 3.1.7)
   bootsnap
   capybara

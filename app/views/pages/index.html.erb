@@ -29,6 +29,10 @@
   <% end %>
 <% end %>
 <br>
+<% random_id = rand(1...1000) %>
+<% @rand_movie = Movie.find_by(id: random_id) %>
+<a href="/movies/<%= @rand_movie.id %>">Show Me a Random Movie</a>
+<br>
 
 <% if current_user %>
   <a href="/logout">Log Out</a>
