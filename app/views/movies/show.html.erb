@@ -9,14 +9,16 @@
 <p>Director: <%= movie_response['Director'] %></p>
 <p>Cast: <%= movie_response['Actors'] %></p>
 <p>Genre(s): <%= @movie.genre %></p>
-<% if movie_response['Ratings'][1]['Value'] %>
-  <p>Rotten Tomatoes: <%= movie_response['Ratings'][1]['Value'] %>
-  <% if movie_response['Ratings'][1]['Value'].to_i > 60 %>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Rotten_Tomatoes.svg/757px-Rotten_Tomatoes.svg.png" width="20" height="20">
-  <% else %>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rotten_Tomatoes_rotten.svg/1200px-Rotten_Tomatoes_rotten.svg.png" width="20" height="20">
+<% movie_response['Ratings'].each do |rating| %>
+  <% if rating['Source'] == "Rotten Tomatoes" %>
+    <p>Rotten Tomatoes: <%= rating['Value'] %>
+    <% if rating['Value'].to_i > 60 %>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Rotten_Tomatoes.svg/757px-Rotten_Tomatoes.svg.png" width="20" height="20">
+    <% else %>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rotten_Tomatoes_rotten.svg/1200px-Rotten_Tomatoes_rotten.svg.png" width="20" height="20">
+    <% end %>
+    </p>
   <% end %>
-  </p>
 <% end %>
 <p>Plot: <%= movie_response['Plot'] %></p>
 

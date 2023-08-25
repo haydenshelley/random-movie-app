@@ -13,31 +13,29 @@
   <body>
     <div id="page-container">
       <div id="content-wrap">
-    <% random_id = rand(1...1000) %>
-    <% @rand_movie = Movie.find_by(id: random_id) %>
+        <% @rand_movie = Movie.all.sample %>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="/liked">My Movies</a>
-            <a class="nav-link active" href="/movies/<%= @rand_movie.id %>">Random Movie</a>
-            <% if current_user %>
-              <a class="nav-link active" href="/logout">Log Out</a>
-            <% else %>
-              <a class="nav-link active" href="/login">Log In</a>
-            <% end %>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/liked">My Movies</a>
+                <a class="nav-link active" href="/movies/<%= @rand_movie.id %>">Random Movie</a>
+                <% if current_user %>
+                  <a class="nav-link active" href="/logout">Log Out</a>
+                <% else %>
+                  <a class="nav-link active" href="/login">Log In</a>
+                <% end %>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </nav>
-
-    <%= yield %>
-    
+        </nav>
+        <br>
+        <%= yield %>
       </div>
       <footer id="footer">
       <p>Buy this site for $19.99</p>
