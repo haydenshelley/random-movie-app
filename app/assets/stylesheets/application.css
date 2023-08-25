@@ -2,12 +2,25 @@ body {
   background: radial-gradient(circle, rgba(87,86,217,1) 0%, rgba(0,0,0,1) 86%);
   text-align: center;
   color: white;
+  font-family: 'Lato', sans-serif;
+}
+
+.siteTitle {
+  font-size: 50px;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .carousel {
   width:300px;
   height:450px;
   margin: auto;
+}
+
+.carousel:hover {
+  transform: scale(1.05);
 }
 
 .mymovies {

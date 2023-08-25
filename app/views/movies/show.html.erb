@@ -22,8 +22,10 @@
 <% end %>
 <p>Plot: <%= movie_response['Plot'] %></p>
 
-<% if Like.where(user_id: current_user.id, movie_id: @movie.id).exists? %>
-  <button type="button">Liked</button>
-<% else %>
-  <%= button_to "Like", like_path(@movie), method: "post" %>
+<% if current_user %>
+  <% if Like.where(user_id: current_user.id, movie_id: @movie.id).exists? %>
+    <button type="button">Liked</button>
+  <% else %>
+    <%= button_to "Like", like_path(@movie), method: "post" %>
+  <% end %>
 <% end %>
