@@ -6,10 +6,20 @@
 <% random_id = rand(1...1000) %>
 <% @rand_movie = Movie.find_by(id: random_id) %>
 <h1><%= @movie.title %></h1>
-<img src="<%= image %>">
+<img src="<%= image %>" width="300" height="450">
+<p>Rating: <%= movie_response['Rated'] %></p>
+<p>Released: <%= movie_response['Released'] %></p>
+<p>Director: <%= movie_response['Director'] %></p>
+<p>Cast: <%= movie_response['Actors'] %></p>
 <p>Genre(s): <%= @movie.genre %></p>
-<p>Audience Approval: <%= @movie.rating %>%</p>
-<p>Synopsis: <%= @movie.plot %></p>
+<p>Rotten Tomatoes: <%= movie_response['Ratings'][1]['Value'] %>
+<% if movie_response['Ratings'][1]['Value'].to_i > 80 %>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Rotten_Tomatoes.svg/757px-Rotten_Tomatoes.svg.png" width="30" height="30">
+<% else %>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rotten_Tomatoes_rotten.svg/1200px-Rotten_Tomatoes_rotten.svg.png" width="30" height="30">
+<% end %>
+</p>
+<p>Plot: <%= movie_response['Plot'] %></p>
 
 <% if Like.where(user_id: current_user.id, movie_id: @movie.id).exists? %>
   <button type="button">Liked</button>
