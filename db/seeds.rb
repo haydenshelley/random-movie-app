@@ -11,12 +11,15 @@
 #   i += 1
 # end
 
-i = 2900
-while i < Movie.count
-  if Movie.find(i)
-    Movie.find(i).destroy
-    i += 1
-  else
-    i += 1
-  end
-end
+# i = 236
+# j = 1
+# while i <= 365
+#   3.times do 
+#     if Movie.find(j)
+#       Movie.find(j).update(
+#         scheduled_on: i)
+#       j += 1
+#     end
+#   end
+#   i += 1
+# end

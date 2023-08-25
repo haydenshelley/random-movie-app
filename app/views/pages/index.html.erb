@@ -1,12 +1,22 @@
-<% @all_movies = Movie.all %>
-<% @rand_movie = @all_movies.sample %>
+<% date = Time.new %>
+<% tonights_movies = Movie.where(scheduled_on: date.yday) %>
+
 <% if current_user %>
   <% my_movies = current_user.movies.sample(3) %>
 <% end %>
 
 <h1>Movie Night</h1>
-<a href="/movies/<%= @rand_movie.id %>">Tonights Movie</a>
+
+<h2>Tonight's Movies</h2>
+<% tonights_movies.each do |movie| %>
+    <% input = movie.title.gsub(" ","+") %>
+    <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
+    <% movie_response = response.parse(:json) %>
+    <% image = movie_response['Poster'] %>
+    <a href="/movies/<%= movie.id %>"><img src="<%= image %>" width="300" height="450"></a>
+  <% end %>
 <br>
+
 <% if current_user %>
 <a href="/liked">My Movies</a>
 <br>
@@ -19,6 +29,7 @@
   <% end %>
 <% end %>
 <br>
+
 <% if current_user %>
   <a href="/logout">Log Out</a>
 <% else %>
