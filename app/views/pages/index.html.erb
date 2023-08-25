@@ -7,24 +7,72 @@
 
 <h1>Movie Night</h1>
 
-<h2>Tonight's Movies</h2>
+<% tonights_movies_array = Array.new %>
+<% tonights_id_array = Array.new %>
+<h3>Tonight's Movies</h3>
 <% tonights_movies.each do |movie| %>
+    <% tonights_id_array << movie.id %>
     <% input = movie.title.gsub(" ","+") %>
     <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
     <% movie_response = response.parse(:json) %>
-    <% image = movie_response['Poster'] %>
-    <a href="/movies/<%= movie.id %>"><img src="<%= image %>" width="300" height="450"></a>
+    <% tonights_movies_array << movie_response %>
   <% end %>
+<div id="carouselExampleAutoplayingone" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="/movies/<%= tonights_id_array[0] %>"><img src="<%= tonights_movies_array[0]['Poster'] %>" class="d-block w-100" alt="..." height="450"></a>
+    </div>
+    <div class="carousel-item">
+      <a href="/movies/<%= tonights_id_array[1] %>"><img src="<%= tonights_movies_array[1]['Poster'] %>" class="d-block w-100" alt="..." height="450"></a>
+    </div>
+    <div class="carousel-item">
+      <a href="/movies/<%= tonights_id_array[2] %>"><img src="<%= tonights_movies_array[2]['Poster'] %>" class="d-block w-100" alt="..." height="450"></a>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplayingone" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplayingone" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 <br>
 
+<% my_movies_image_array = Array.new %>
+<% my_movies_id_array = Array.new %>
 <% if current_user %>
-<a href="/liked">My Movies</a>
-<br>
+<h3><a id="mymovies" href="/liked"><%= current_user.name %>'s Movies</a></h3>
 <% my_movies.each do |movie| %>
+    <% my_movies_id_array << movie.id %>
     <% input = movie.title.gsub(" ","+") %>
     <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
     <% movie_response = response.parse(:json) %>
-    <% image = movie_response['Poster'] %>
-    <a href="/movies/<%= movie.id %>"><img src="<%= image %>" width="300" height="450"></a>
+    <% my_movies_image_array << movie_response %>
   <% end %>
+
+  <div id="carouselExampleAutoplayingtwo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="/movies/<%= my_movies_id_array[0] %>"><img src="<%= my_movies_image_array[0]['Poster'] %>" class="d-block w-100" alt="..." height="450"></a>
+      </div>
+      <div class="carousel-item">
+        <a href="/movies/<%= my_movies_id_array[1] %>"><img src="<%= my_movies_image_array[1]['Poster'] %>" class="d-block w-100" alt="..." height="450"></a>
+      </div>
+      <div class="carousel-item">
+        <a href="/movies/<%= my_movies_id_array[2] %>"><img src="<%= my_movies_image_array[2]['Poster'] %>" class="d-block w-100" alt="..." height="450"></a>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplayingtwo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplayingtwo" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <br>
+
 <% end %>

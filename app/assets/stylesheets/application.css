@@ -4,3 +4,14 @@ body {
   text-align: center;
   color: white;
 }
+
+.carousel {
+  width:300px;
+  height:450px;
+  margin: auto;
+}
+
+#mymovies {
+  color: white;
+  text-decoration: none;
+}
