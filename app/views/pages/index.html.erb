@@ -43,7 +43,7 @@
 <% my_movies_image_array = Array.new %>
 <% my_movies_id_array = Array.new %>
 <% if current_user %>
-<h3><a id="mymovies" href="/liked"><%= current_user.name %>'s Movies</a></h3>
+<h3><a class="mymovies" href="/liked"><%= current_user.name %>'s Movies</a></h3>
 <% my_movies.each do |movie| %>
     <% my_movies_id_array << movie.id %>
     <% input = movie.title.gsub(" ","+") %>
@@ -73,6 +73,8 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  <br>
+  <br>
   <br>
 
 <% end %>

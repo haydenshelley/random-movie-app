@@ -3,7 +3,7 @@
   <% input = movie.title.gsub(" ","+") %>
   <% response = HTTP.get("https://www.omdbapi.com/?t=#{input}&apikey=d5600087") %>
   <% movie_response = response.parse(:json) %>
-  <a href="/movies/<%= movie.id%>"><%= movie.title %></a>
+  <a class="mymovies" href="/movies/<%= movie.id%>"><%= movie.title %></a>
   <br>
   <a href="/movies/<%= movie.id %>"><img src="<%= movie_response["Poster"] %>"></a>
   <br>
